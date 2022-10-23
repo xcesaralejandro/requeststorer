@@ -37,14 +37,5 @@ This middleware will store the request before going through the controller.
 This middleware will store the request once it is answered.
 
 
-This package is much more useful if you make sure you create your resources semantically and use proper http tags.
-
-What you will find in your requests table is:
-
-user id, route name, controller name, action (Function assigned on the controller), http method, path_info, uri, query_string,
-is_secure, is_ajax, client_ip, client_port, user_agent, referer, server_protocol, request params, request content params, 
-http_response_code, stored_on, send_at
-
-
 
 

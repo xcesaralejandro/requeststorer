@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 class StoreOnResponse
 {
+
     public function handle($request, Closure $next){
         return $next($request);
     }

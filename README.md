@@ -38,4 +38,14 @@ This middleware will store the request once it is answered.
 
 
 
+In some cases you won't need to store parameters or the response, as they may contain login credentials and keeping them raw can be a security issue. To avoid storing some columns just pass the name as a parameter to the middleware
+
+````store.on.arrival:column1,column2````
+
+````store.on.response:column1,column2````
+
+column1 and column2 will be filled with null when storing the request.
+
+
+
 

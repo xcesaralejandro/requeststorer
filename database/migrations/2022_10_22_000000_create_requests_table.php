@@ -16,14 +16,14 @@ class CreateRequestsTable extends Migration
             $table->id();
             $table->string("user_id")->nullable();
             $table->string("route_name", 2000)->nullable();
-            $table->string("controller", 2000);
-            $table->string("action", 2000);
+            $table->string("controller", 2000)->nullable();
+            $table->string("action", 2000)->nullable();
             $table->string("method")->nullable();
             $table->text("path_info")->nullable();
             $table->text("uri")->nullable();
             $table->string("query_string")->nullable();
-            $table->boolean("is_secure");
-            $table->boolean("is_ajax");
+            $table->boolean("is_secure")->nullable();
+            $table->boolean("is_ajax")->nullable();
             $table->string("client_ip")->nullable();
             $table->string("client_port")->nullable();
             $table->text("user_agent")->nullable();

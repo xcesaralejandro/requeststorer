@@ -8,14 +8,16 @@ use Illuminate\Support\Facades\Route;
 
 class StoreOnResponse
 {
+    private $nullify_fields = [];
 
-    public function handle($request, Closure $next){
+    public function handle($request, Closure $next, ...$nullify_fields){
+        $this->nullify_fields = $nullify_fields;
         return $next($request);
     }
 
     public function terminate($request, $response){
         list($controller, $action) = explode('@', Route::currentRouteAction());
-        DB::table('requests')->insert([
+        $store = [
             'user_id' =>  $request->user()->id ?? null,
             'route_name' => Route::currentRouteName(),
             'controller' => class_basename($controller),
@@ -37,6 +39,18 @@ class StoreOnResponse
             'stored_on' => "response",
             'send_at' => $request->server('REQUEST_TIME'),
             'created_at' => Carbon::now()
-        ]);
+        ];
+        $this->nullifyFields($store);
+        DB::table('requests')->insert($store);
+    }
+
+    private function nullifyFields(array &$request){
+        foreach($this->nullify_fields as $field){
+            $clean = fn($f) => strtolower(str_replace(":class:", "", strtolower($f)));
+            $field = $clean($field);
+            if(isset($request[$field])){
+                $request[$field] = null;
+            }
+        }
     }
 }

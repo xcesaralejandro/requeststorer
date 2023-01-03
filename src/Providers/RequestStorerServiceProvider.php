@@ -1,6 +1,8 @@
 <?php
 namespace xcesaralejandro\requeststorer\Providers;
 
+use App\Http\Middleware\StoreOnArrival;
+use App\Http\Middleware\StoreOnResponse;
 use Illuminate\Support\ServiceProvider;
 
 class RequestStorerServiceProvider extends ServiceProvider {
@@ -18,6 +20,7 @@ class RequestStorerServiceProvider extends ServiceProvider {
         $router = $this->app['router'];
         $router->aliasMiddleware('store.on.arrival', 'App\\Http\\Middleware\\StoreOnArrival::class');
         $router->aliasMiddleware('store.on.response', 'App\\Http\\Middleware\\StoreOnResponse::class');
+        $this->app->singleton(StoreOnResponse::class);
         $this->loadMigrationsFrom($this->packageBasePath('database/migrations'));
     }
 

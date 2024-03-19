@@ -17,6 +17,14 @@ class CreateRequestsTable extends Migration
             $table->string("user_id")->nullable();
             $table->string("route_name", 2000)->nullable();
             $table->string("controller", 2000)->nullable();
+            $table->string("header_referer")->nullable();
+            $table->string("sec_ch_ua")->nullable();
+            $table->string("sec_ch_ua_mobile")->nullable();
+            $table->string("sec_ch_ua_platform")->nullable();
+            $table->string("sec_ch_ua_mode")->nullable();
+            $table->string("x-forwarded-for")->nullable();
+            $table->string("x-forwarded-host")->nullable();
+            $table->string("x-real-ip")->nullable();
             $table->string("action", 2000)->nullable();
             $table->string("method")->nullable();
             $table->text("path_info")->nullable();

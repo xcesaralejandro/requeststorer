@@ -16,7 +16,8 @@ class StoreOnResponse
     }
 
     public function terminate($request, $response){
-        list($controller, $action) = explode('@', Route::currentRouteAction());
+        $route = explode('@', Route::currentRouteAction());
+        list($controller, $action) = count($route) == 2 ? $route : [null, null];
         $store = [
             'user_id' =>  $request->user()->id ?? null,
             'route_name' => Route::currentRouteName(),
